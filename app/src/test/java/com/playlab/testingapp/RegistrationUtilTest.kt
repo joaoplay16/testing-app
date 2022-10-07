@@ -30,7 +30,7 @@ class RegistrationUtilTest {
     @Test
     fun `username already exists returns false`(){
         val result = RegistrationUtil.validateRegistrationInput(
-            "Jax",
+            "Carl",
             "123",
             "123"
         )
