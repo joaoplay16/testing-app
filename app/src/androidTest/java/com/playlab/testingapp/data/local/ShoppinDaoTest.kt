@@ -63,4 +63,19 @@ class ShoppinDaoTest {
         assertThat(allShoppingItems).doesNotContain(shoppingItem)
     }
 
+    @Test
+    fun observeTotalPriceSum() = runTest {
+        val shoppingItem1 = ShoppingItem("name", 2, 10f, "url", id = 1)
+        val shoppingItem2 = ShoppingItem("name", 4, 5.5f, "url", id = 3)
+        val shoppingItem3 = ShoppingItem("name", 0, 100f, "url", id = 4)
+
+        dao.insertShoppingItem(shoppingItem1)
+        dao.insertShoppingItem(shoppingItem2)
+        dao.insertShoppingItem(shoppingItem3)
+
+        val totalPrice = dao.observeTotalPrice().getOrAwaitValue()
+
+        assertThat(totalPrice).isEqualTo(2 * 10f + 4 * 5.5f)
+    }
+
 }
