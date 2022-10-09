@@ -20,7 +20,10 @@ import org.junit.runner.RunWith
 @SmallTest
 class ShoppinDaoTest {
 
-
+    /**
+     * tells to JUnit that we want to execute all of the code inside of this
+     * test class, one function after another in the same thread
+     **/
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
