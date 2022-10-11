@@ -2,10 +2,13 @@ package com.playlab.testingapp.di
 
 import android.content.Context
 import androidx.room.Room
+import com.playlab.testingapp.data.local.ShoppingDao
 import com.playlab.testingapp.data.local.ShoppingItemDababase
 import com.playlab.testingapp.data.remote.PixabayAPI
 import com.playlab.testingapp.other.Constants.BASE_URL
 import com.playlab.testingapp.other.Constants.DATABASE_NAME
+import com.playlab.testingapp.repositories.DefaultShoppingRepository
+import com.playlab.testingapp.repositories.ShoppingRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,6 +31,13 @@ object AppModule {
         ShoppingItemDababase::class.java,
         DATABASE_NAME
     ).build()
+
+    @Singleton
+    @Provides
+    fun provideDefaultShoppingRepository(
+        dao: ShoppingDao,
+        api: PixabayAPI
+    ) = DefaultShoppingRepository(dao, api) as ShoppingRepository
 
     @Singleton
     @Provides
