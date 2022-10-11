@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.playlab.testingapp.data.local.ShoppingItemDababase
 import com.playlab.testingapp.data.remote.PixabayAPI
-import com.playlab.testingapp.other.Other.BASE_URL
-import com.playlab.testingapp.other.Other.DATABASE_NAME
+import com.playlab.testingapp.other.Constants.BASE_URL
+import com.playlab.testingapp.other.Constants.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
