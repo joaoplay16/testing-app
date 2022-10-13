@@ -18,7 +18,7 @@ import javax.inject.Named
 @ExperimentalCoroutinesApi
 @SmallTest
 @HiltAndroidTest
-class ShoppinDaoTest {
+class ShoppingDaoTest {
 
     @get:Rule(order = 0)
     var hiltRule = HiltAndroidRule(this)
