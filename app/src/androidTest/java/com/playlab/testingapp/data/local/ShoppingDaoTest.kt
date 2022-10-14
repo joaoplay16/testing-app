@@ -3,6 +3,8 @@ package com.playlab.testingapp.data.local
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
+import com.playlab.testingapp.launchFragmentInHiltContainer
+import com.playlab.testingapp.ui.ShoppingFragment
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import getOrAwaitValue
@@ -44,6 +46,13 @@ class ShoppingDaoTest {
     @After
     fun teardown(){
         database.close()
+    }
+
+    @Test
+    fun testLaunchFragmentInHiltContainer() {
+        launchFragmentInHiltContainer<ShoppingFragment> {
+
+        }
     }
 
     @Test
