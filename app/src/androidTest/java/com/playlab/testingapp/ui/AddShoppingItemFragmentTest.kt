@@ -54,6 +54,26 @@ class AddShoppingItemFragmentTest {
     }
 
     @Test
+    fun pressBackButton_clearCurrentImageUrl() {
+        val navController = mock(NavController::class.java)
+
+        lateinit var shoppingViewModel: ShoppingViewModel
+
+        launchFragmentInHiltContainer<AddShoppingItemFragment> {
+            Navigation.setViewNavController(requireView(), navController)
+            viewModel.setCurImageUrl("url")
+            shoppingViewModel = viewModel
+        }
+
+        pressBack()
+
+        val currentImageUrl = shoppingViewModel.curImageUrl.getOrAwaitValue()
+
+        assertThat(currentImageUrl).isEqualTo("")
+
+    }
+
+    @Test
     fun pressBackButton_popBackStack() {
         val navController = mock(NavController::class.java)
 
