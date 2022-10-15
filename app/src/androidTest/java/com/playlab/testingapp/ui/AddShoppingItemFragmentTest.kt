@@ -9,7 +9,9 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.filters.MediumTest
 import com.google.common.truth.Truth.assertThat
+import com.playlab.testingapp.R
 import com.playlab.testingapp.launchFragmentInHiltContainer
+import com.playlab.testingapp.repositories.FakeShoppingRepositoryAndroidTest
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import getOrAwaitValue
@@ -19,7 +21,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
-import com.playlab.testingapp.R
 
 
 @MediumTest
@@ -56,18 +57,19 @@ class AddShoppingItemFragmentTest {
     @Test
     fun pressBackButton_clearCurrentImageUrl() {
         val navController = mock(NavController::class.java)
-
-        lateinit var shoppingViewModel: ShoppingViewModel
+        val testViewModel = ShoppingViewModel(FakeShoppingRepositoryAndroidTest())
+        val imageUrl = "TEST"
 
         launchFragmentInHiltContainer<AddShoppingItemFragment> {
             Navigation.setViewNavController(requireView(), navController)
-            viewModel.setCurImageUrl("url")
-            shoppingViewModel = viewModel
+            viewModel = testViewModel
         }
+
+        testViewModel.setCurImageUrl(imageUrl)
 
         pressBack()
 
-        val currentImageUrl = shoppingViewModel.curImageUrl.getOrAwaitValue()
+        val currentImageUrl = testViewModel.curImageUrl.getOrAwaitValue()
 
         assertThat(currentImageUrl).isEqualTo("")
 
