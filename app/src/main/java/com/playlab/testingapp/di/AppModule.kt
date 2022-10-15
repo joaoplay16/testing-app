@@ -2,6 +2,9 @@ package com.playlab.testingapp.di
 
 import android.content.Context
 import androidx.room.Room
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.playlab.testingapp.R
 import com.playlab.testingapp.data.local.ShoppingDao
 import com.playlab.testingapp.data.local.ShoppingItemDababase
 import com.playlab.testingapp.data.remote.PixabayAPI
@@ -38,6 +41,15 @@ object AppModule {
         dao: ShoppingDao,
         api: PixabayAPI
     ) = DefaultShoppingRepository(dao, api) as ShoppingRepository
+
+    @Singleton
+    @Provides
+    fun provideGlideInstance(@ApplicationContext context: Context) =
+        Glide.with(context).applyDefaultRequestOptions(
+            RequestOptions()
+                .placeholder(R.drawable.ic_image)
+                .error(R.drawable.ic_image)
+        )
 
     @Singleton
     @Provides
