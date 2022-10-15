@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
+    id "androidx.navigation.safeargs.kotlin"
 }
 
 android {
@@ -17,6 +18,10 @@ android {
         buildConfigField("String", "API_KEY", API_KEY)
 
         testInstrumentationRunner "com.playlab.testingapp.HiltTestRunner"
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 
     buildTypes {
@@ -53,6 +58,8 @@ dependencies {
 
     // Room
     implementation "androidx.room:room-runtime:2.4.3"
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
     kapt "androidx.room:room-compiler:2.4.3"
 
     // Kotlin Extensions and Coroutines support for Room
