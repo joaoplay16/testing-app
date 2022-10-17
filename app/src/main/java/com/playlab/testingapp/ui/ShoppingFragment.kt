@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -41,6 +42,8 @@ class ShoppingFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(ShoppingViewModel::class.java)
+        setupRecyclerView()
+        setupObservers()
 
         binding.fabAddShoppingItem.setOnClickListener {
             findNavController().navigate(
@@ -69,6 +72,18 @@ class ShoppingFragment @Inject constructor(
                 show()
             }
         }
+    }
+
+    fun setupObservers() {
+        viewModel.shoppingItems.observe(viewLifecycleOwner, Observer {
+            shoppingItemAdapter.shoppingItems = it
+        })
+
+        viewModel.totalPrice.observe(viewLifecycleOwner, Observer {
+            val price = it ?: 0f
+            val priceText = "Total price $price$"
+            binding.tvShoppingItemPrice.text = priceText
+        })
     }
 
     fun setupRecyclerView(){
