@@ -38,7 +38,7 @@ class AddShoppingItemFragmentTest {
     var hiltRule = HiltAndroidRule(this)
 
     @Inject
-    lateinit var fragmentFactory: ShoppingFragmentFactory
+    lateinit var fragmentFactory: TestShoppingFragmentFactory
 
     @Before
     fun setup() {
