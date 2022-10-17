@@ -40,6 +40,14 @@ class AddShoppingItemFragment @Inject constructor(
         viewModel = ViewModelProvider(requireActivity()).get(ShoppingViewModel::class.java)
         subscribeToObservers()
 
+        binding.btnAddShoppingItem.setOnClickListener{
+            viewModel.insertShoppingItem(
+                binding.etShoppingItemName.text.toString(),
+                binding.etShoppingItemAmount.text.toString(),
+                binding.etShoppingItemPrice.text.toString(),
+
+            )
+        }
 
         binding.ivShoppingImage.setOnClickListener{
             findNavController().navigate(
