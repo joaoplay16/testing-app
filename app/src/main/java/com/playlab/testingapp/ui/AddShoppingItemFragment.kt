@@ -1,11 +1,11 @@
 package com.playlab.testingapp.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -13,11 +13,11 @@ import com.bumptech.glide.RequestManager
 import com.google.android.material.snackbar.Snackbar
 import com.playlab.testingapp.R
 import com.playlab.testingapp.databinding.FragmentAddShoppingItemBinding
-import com.playlab.testingapp.databinding.FragmentShoppingBinding
 import com.playlab.testingapp.other.Status
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class AddShoppingItemFragment @Inject constructor(
     val glide: RequestManager
 ): Fragment(R.layout.fragment_add_shopping_item) {

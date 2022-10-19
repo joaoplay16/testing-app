@@ -12,8 +12,10 @@ import com.playlab.testingapp.R
 import com.playlab.testingapp.adapter.ImageAdapter
 import com.playlab.testingapp.databinding.FragmentImagePickBinding
 import com.playlab.testingapp.other.Constants.GRID_SPAN_COUNT
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class ImagePickFragment @Inject constructor(
     val imageAdapter: ImageAdapter
 ) : Fragment(R.layout.fragment_image_pick) {

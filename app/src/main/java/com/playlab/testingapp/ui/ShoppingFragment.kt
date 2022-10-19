@@ -18,9 +18,10 @@ import com.playlab.testingapp.R
 import com.playlab.testingapp.adapter.ShoppingItemAdapter
 import com.playlab.testingapp.databinding.FragmentShoppingBinding
 import com.playlab.testingapp.other.Constants
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class ShoppingFragment @Inject constructor(
     val shoppingItemAdapter: ShoppingItemAdapter,
     var viewModel: ShoppingViewModel? = null
