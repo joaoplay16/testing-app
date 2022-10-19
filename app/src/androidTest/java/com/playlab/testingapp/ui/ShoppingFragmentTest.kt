@@ -69,7 +69,7 @@ class ShoppingFragmentTest {
     fun clickAddShoppingItemButton_navigateToAddShoppingItemFragment() {
         val navController = mock(NavController::class.java)
 
-        launchFragmentInHiltContainer<ShoppingFragment> {
+        launchFragmentInHiltContainer<ShoppingFragment> (fragmentFactory = fragmentFactory){
             Navigation.setViewNavController(requireView(), navController)
         }
 
