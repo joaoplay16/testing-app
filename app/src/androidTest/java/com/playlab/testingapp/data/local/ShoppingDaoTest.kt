@@ -49,13 +49,6 @@ class ShoppingDaoTest {
     }
 
     @Test
-    fun testLaunchFragmentInHiltContainer() {
-        launchFragmentInHiltContainer<ShoppingFragment> {
-
-        }
-    }
-
-    @Test
     fun insertShoppingItem() = runTest {
         val shoppingItem = ShoppingItem("name", 1, 1f, "url", id = 1)
         dao.insertShoppingItem(shoppingItem)
