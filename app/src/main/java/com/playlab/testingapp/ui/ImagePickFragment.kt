@@ -1,14 +1,18 @@
 package com.playlab.testingapp.ui
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.textfield.TextInputEditText
 import com.playlab.testingapp.R
 import com.playlab.testingapp.adapter.ImageAdapter
 import com.playlab.testingapp.databinding.FragmentImagePickBinding
@@ -38,6 +42,7 @@ class ImagePickFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(ShoppingViewModel::class.java)
+        searchForImage()
         setupObservers()
         setupRecyclerView()
 
@@ -45,6 +50,20 @@ class ImagePickFragment @Inject constructor(
             findNavController().popBackStack()
             viewModel.setCurImageUrl(it)
         }
+
+        binding.etSearch.setOnEditorActionListener{ view, actionId, event ->
+            return@setOnEditorActionListener when (actionId){
+                EditorInfo.IME_ACTION_DONE -> {
+                    searchForImage(view.text.toString())
+                    true
+                } else -> false
+            }
+        }
+    }
+
+    private fun searchForImage(query: String = "fruit"){
+        viewModel.searchForImage(query)
+
     }
 
     private fun setupObservers(){
