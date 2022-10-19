@@ -69,7 +69,7 @@ class AddShoppingItemFragmentTest {
     fun clickShoppingItemImageView_navigateToImagePickFragment(){
         val navController = mock(NavController::class.java)
 
-        launchFragmentInHiltContainer<AddShoppingItemFragment> {
+        launchFragmentInHiltContainer<AddShoppingItemFragment> (fragmentFactory = fragmentFactory){
             Navigation.setViewNavController(requireView(), navController)
         }
 
@@ -86,7 +86,7 @@ class AddShoppingItemFragmentTest {
         val testViewModel = ShoppingViewModel(FakeShoppingRepositoryAndroidTest())
         val imageUrl = "TEST"
 
-        launchFragmentInHiltContainer<AddShoppingItemFragment> {
+        launchFragmentInHiltContainer<AddShoppingItemFragment> (fragmentFactory = fragmentFactory) {
             Navigation.setViewNavController(requireView(), navController)
             viewModel = testViewModel
         }
@@ -105,7 +105,7 @@ class AddShoppingItemFragmentTest {
     fun pressBackButton_popBackStack() {
         val navController = mock(NavController::class.java)
 
-        launchFragmentInHiltContainer<AddShoppingItemFragment> {
+        launchFragmentInHiltContainer<AddShoppingItemFragment> (fragmentFactory = fragmentFactory){
             Navigation.setViewNavController(requireView(), navController)
         }
 
