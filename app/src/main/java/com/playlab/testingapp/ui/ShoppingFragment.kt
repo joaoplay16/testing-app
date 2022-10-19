@@ -8,16 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.LEFT
 import androidx.recyclerview.widget.ItemTouchHelper.RIGHT
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.playlab.testingapp.R
 import com.playlab.testingapp.adapter.ShoppingItemAdapter
 import com.playlab.testingapp.databinding.FragmentShoppingBinding
-import com.playlab.testingapp.other.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -42,8 +41,8 @@ class ShoppingFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = viewModel?: ViewModelProvider(requireActivity()).get(ShoppingViewModel::class.java)
-        setupRecyclerView()
         setupObservers()
+        setupRecyclerView()
 
         binding.fabAddShoppingItem.setOnClickListener {
             findNavController().navigate(
@@ -74,7 +73,7 @@ class ShoppingFragment @Inject constructor(
         }
     }
 
-    fun setupObservers() {
+    private fun setupObservers() {
         viewModel?.shoppingItems?.observe(viewLifecycleOwner, Observer {
             shoppingItemAdapter.shoppingItems = it
         })
@@ -86,10 +85,10 @@ class ShoppingFragment @Inject constructor(
         })
     }
 
-    fun setupRecyclerView(){
+    private fun setupRecyclerView(){
         binding.rvShoppingItems.apply {
             adapter = shoppingItemAdapter
-            layoutManager = GridLayoutManager(requireActivity(), Constants.GRID_SPAN_COUNT)
+            layoutManager = LinearLayoutManager(requireContext())
             ItemTouchHelper(itemTouchCallback).attachToRecyclerView(this)
         }
     }
