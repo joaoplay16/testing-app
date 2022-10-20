@@ -17,7 +17,10 @@ class TestShoppingFragmentFactory @Inject constructor(
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when (className){
             ImagePickFragment::class.java.name -> ImagePickFragment(imageAdapter)
-            AddShoppingItemFragment::class.java.name -> AddShoppingItemFragment(glide)
+            AddShoppingItemFragment::class.java.name -> AddShoppingItemFragment(
+                glide,
+                ShoppingViewModel(FakeShoppingRepositoryAndroidTest())
+            )
             ShoppingFragment::class.java.name -> ShoppingFragment(
                 shoppingItemAdapter,
                 ShoppingViewModel(FakeShoppingRepositoryAndroidTest())
