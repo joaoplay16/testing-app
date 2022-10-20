@@ -7,7 +7,9 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.replaceText
+import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.filters.MediumTest
 import com.google.common.truth.Truth.assertThat
 import com.playlab.testingapp.R
@@ -100,6 +102,21 @@ class AddShoppingItemFragmentTest {
         assertThat(currentImageUrl).isEqualTo("")
 
     }
+
+@Test
+fun insertIntoDd_clearInputFields() {
+    launchFragmentInHiltContainer<AddShoppingItemFragment>(
+        fragmentFactory = fragmentFactory
+    )
+    onView(withId(R.id.etShoppingItemName)).perform( replaceText("Shopping item"))
+    onView(withId(R.id.etShoppingItemAmount)).perform(replaceText("2"))
+    onView(withId(R.id.etShoppingItemPrice)).perform(replaceText("5"))
+    onView(withId(R.id.btnAddShoppingItem)).perform(click())
+
+    onView(withId(R.id.etShoppingItemName)).check(matches(withText("")))
+    onView(withId(R.id.etShoppingItemAmount)).check(matches(withText("")))
+    onView(withId(R.id.etShoppingItemPrice)).check(matches(withText("")))
+}
 
     @Test
     fun pressBackButton_popBackStack() {
