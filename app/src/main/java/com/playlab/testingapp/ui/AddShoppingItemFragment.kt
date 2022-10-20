@@ -67,6 +67,12 @@ class AddShoppingItemFragment @Inject constructor(
         requireActivity().onBackPressedDispatcher.addCallback(callback)
     }
 
+    private fun clearFields(){
+        binding.etShoppingItemName.setText("")
+        binding.etShoppingItemAmount.setText("")
+        binding.etShoppingItemPrice.setText("")
+    }
+
     private fun subscribeToObservers() {
         viewModel?.curImageUrl?.observe(viewLifecycleOwner, Observer {
             glide.load(it).into(binding.ivShoppingImage)
@@ -76,6 +82,7 @@ class AddShoppingItemFragment @Inject constructor(
             it.getContentIfNotHandled()?.let { result ->
                 when(result.status){
                     Status.SUCCESS -> {
+                        clearFields()
                         Snackbar.make(
                             binding.root,
                             "Added Shopping Item",
