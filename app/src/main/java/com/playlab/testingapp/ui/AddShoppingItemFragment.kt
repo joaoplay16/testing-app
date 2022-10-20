@@ -1,10 +1,12 @@
 package com.playlab.testingapp.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,14 +17,15 @@ import com.playlab.testingapp.R
 import com.playlab.testingapp.databinding.FragmentAddShoppingItemBinding
 import com.playlab.testingapp.other.Status
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddShoppingItemFragment @Inject constructor(
-    val glide: RequestManager
+    val glide: RequestManager,
+    var viewModel: ShoppingViewModel? = null
 ): Fragment(R.layout.fragment_add_shopping_item) {
 
-    lateinit var viewModel: ShoppingViewModel
     lateinit var binding: FragmentAddShoppingItemBinding
 
     override fun onCreateView(
@@ -37,15 +40,14 @@ class AddShoppingItemFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity()).get(ShoppingViewModel::class.java)
+        viewModel = viewModel ?: ViewModelProvider(requireActivity()).get(ShoppingViewModel::class.java)
         subscribeToObservers()
 
         binding.btnAddShoppingItem.setOnClickListener{
-            viewModel.insertShoppingItem(
+            viewModel?.insertShoppingItem(
                 binding.etShoppingItemName.text.toString(),
                 binding.etShoppingItemAmount.text.toString(),
                 binding.etShoppingItemPrice.text.toString(),
-
             )
         }
 
@@ -57,7 +59,7 @@ class AddShoppingItemFragment @Inject constructor(
 
         val callback = object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
-                viewModel.setCurImageUrl("")
+                viewModel?.setCurImageUrl("")
                 findNavController().popBackStack()
             }
         }
@@ -66,11 +68,11 @@ class AddShoppingItemFragment @Inject constructor(
     }
 
     private fun subscribeToObservers() {
-        viewModel.curImageUrl.observe(viewLifecycleOwner, Observer {
+        viewModel?.curImageUrl?.observe(viewLifecycleOwner, Observer {
             glide.load(it).into(binding.ivShoppingImage)
         })
 
-        viewModel.insertShoppingItemStatus.observe(viewLifecycleOwner, Observer {
+        viewModel?.insertShoppingItemStatus?.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { result ->
                 when(result.status){
                     Status.SUCCESS -> {
