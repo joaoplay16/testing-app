@@ -1,0 +1,60 @@
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:name="vector"
+            android:width="288dp"
+            android:height="288dp"
+            android:viewportWidth="288"
+            android:viewportHeight="288">
+            <group
+                android:name="wrapper"
+                android:pivotX="144"
+                android:pivotY="144"
+                android:scaleX="0.85"
+                android:scaleY="0.85">
+                <clip-path
+                    android:name="clip0_1_12"
+                    android:pathData="M 79 78 L 210 78 L 210 209 L 79 209 Z"/>
+                <group android:name="group">
+                    <path
+                        android:name="path"
+                        android:pathData="M 210 209 L 79 209 L 79 78 L 210 78 L 143.149 142.528 L 210 209 Z"
+                        android:fillColor="#b600cf"
+                        android:strokeWidth="1"/>
+                </group>
+            </group>
+        </vector>
+    </aapt:attr>
+    <target android:name="wrapper">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:propertyName="scaleX"
+                    android:startOffset="200"
+                    android:duration="500"
+                    android:valueFrom="0"
+                    android:valueTo="0.85"
+                    android:valueType="floatType"
+                    android:interpolator="@android:anim/overshoot_interpolator"/>
+                <objectAnimator
+                    android:propertyName="scaleY"
+                    android:startOffset="200"
+                    android:duration="500"
+                    android:valueFrom="0"
+                    android:valueTo="0.85"
+                    android:valueType="floatType"
+                    android:interpolator="@android:anim/overshoot_interpolator"/>
+                <objectAnimator
+                    android:propertyName="rotation"
+                    android:startOffset="250"
+                    android:duration="350"
+                    android:valueFrom="0"
+                    android:valueTo="360"
+                    android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+            </set>
+        </aapt:attr>
+    </target>
+</animated-vector>
